@@ -5,6 +5,10 @@ import './Radieschen.css';
 class RadiHeader extends Component {
     constructor(props){
 	super(props);
+	/*
+	  Javascript has weird method context rules. It is determined at invocation
+          time! This line below is the correct way to bind a method to the context I want. 
+	 */
 	this.makeButton = this.makeButton.bind(this)
     }
     makeButton() {
