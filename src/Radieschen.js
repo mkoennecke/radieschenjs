@@ -3,6 +3,17 @@ import logo from './radilogo.gif';
 import './Radieschen.css';
 
 class RadiHeader extends Component {
+    constructor(props){
+	super(props);
+	this.makeButton = this.makeButton.bind(this)
+    }
+    makeButton() {
+	if(this.props.mode === 'display'){
+            return <input className="radi-button" type="button" onClick={this.props.swapState} value="Edit"/>;
+	} else {
+            return <input className="save-button" type="button" onClick={this.props.swapState} value="Save"/>;
+	}
+    }
     render(){
 	return(
 	  <header className="Radieschen-header">
@@ -10,7 +21,7 @@ class RadiHeader extends Component {
                  <img src={logo} className="Radieschen-logo" alt="logo" />
                  <h2 className="Radieschen-header-h2">Welcome to Radieschen-JS</h2>
 	        <form>
-         	<input className="radi-button" type="button" onClick={alert('Hello World!')} value="Edit"/>
+                { this.makeButton() }
 		</form>
 	       </div>
 	  </header>
@@ -47,11 +58,20 @@ class Radieschen extends Component {
     constructor(props){
 	super(props);
 	this.state = {mode : 'display'};
-   }
+	this.swapState = this.swapState.bind(this)
+    }
+    swapState() {
+	console.log('swapState called in mode ' + this.state.mode);
+	if(this.state.mode === 'display') {
+	    this.setState({mode: 'edit'});
+	} else {
+	    this.setState({mode: 'display'});
+	}
+    }
   render() {
       return (
 	  <div>
-	    <RadiHeader />
+	      <RadiHeader swapState={this.swapState} mode={this.state.mode} />
 	      <RadiBody mode={this.state.mode} />
 	   </div>
     );

@@ -17,6 +17,15 @@
     color: #FFFF00;
     font-size: large;
 }
+.save-button {
+    height: 80px;
+    width: 120px;
+    float: left;
+    background-color: #FF69B4;
+    color: #000000;
+    font-size: large;
+}
+
 .Radieschen-centered {
     text-align: center;    
 }
