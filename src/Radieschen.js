@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './radilogo.gif';
 import './Radieschen.css';
+import  Markdown from 'react-remarkable';
 
 class RadiHeader extends Component {
     constructor(props){
@@ -32,13 +33,23 @@ class RadiHeader extends Component {
 	)
     }
 }
-
+/*----------------------------------------------------------------------------------*/
 class RadiBody extends Component {
     constructor(props){
 	super(props);
+	this.state = {file : 'index.md'};
+	var test = localStorage.getItem('index.md');
+	if( !test) {
+	    var defText = '# Radieschen Personal Wiki Startpage\n Enter text in markdown in edit mode';
+	    localStorage.setItem('index.md',defText);
+	    this.state = {data: defText} ;
+	} else {
+	    this.state = {data : test} ;
+	}
+		      
 	RadiBody.prototype.doBody = function() {
    	  if(this.props.mode === 'display'){
- 	      return('I am displaying!');
+ 	      return( <Markdown source={this.state.data} />);
 	  } else {
 	    return('I am editing!')
 	  }
@@ -50,14 +61,13 @@ class RadiBody extends Component {
 		<p className="Radieschen-intro">
 		{
 		    this.doBody()
-		   
 		}
              </p>
 	   </section>
 	)
     }
 }
-
+/*--------------------------------------------------------------------------------*/
 class Radieschen extends Component {
     constructor(props){
 	super(props);
